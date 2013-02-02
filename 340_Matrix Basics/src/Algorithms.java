@@ -2,7 +2,7 @@
 public class Algorithms extends Matrix{
 	
 	private enum Algo{
-		GAUSSIAN, GAUSSJORDAN, INVERSE, NONE
+		GAUSSIAN, GAUSSJORDAN, INVERSE, DETERMINANT, NONE
 	}
 	private Algo algoSet;
 	
@@ -60,6 +60,13 @@ public class Algorithms extends Matrix{
 		return  gaussBase(iCopy);
 	}
 	
+	public double nDeterminant(double[][] c){
+		double[][] iCopy = mCopy(c);
+		algoSet = Algo.DETERMINANT;
+		
+		return  gaussBase(iCopy)[0][0];
+	}
+	
 	
 	/*  Assumes matrix argument is already augmented.
 	 * 
@@ -79,7 +86,10 @@ public class Algorithms extends Matrix{
 		double[][] c = mCopy(cCopy);
 		
 		
-		int E = 1;
+		double E = 1;
+		//for determinant
+		int r = 0;
+		
 		double max = Double.MIN_VALUE;
 		int p = 0;
 		//make sure all js are j-1
@@ -104,18 +114,20 @@ public class Algorithms extends Matrix{
 				double[] temp = c[j-1];
 				c[j-1] = c[p];
 				c[p] = temp;
-			}
-			
-			//divide row j by Cjj
-			double jj = c[j-1][j-1];
-			for(int i = 0;i<c[j-1].length;i++){
-				c[j-1][i] = c[j-1][i]/jj;
+				r++;
 			}
 			
 			//for each i != j-1, row i - c[i][j-1]*row j
 			switch(algoSet){
 			case INVERSE:
 			case GAUSSJORDAN:
+				
+				//divide row j by Cjj
+				double jj = c[j-1][j-1];
+				for(int i = 0;i<c[j-1].length;i++){
+					c[j-1][i] = c[j-1][i]/jj;
+				}
+				
 				for (int i = 0; i < c.length; i++) {
 					double ij = c[i][j-1];
 					if(i != j-1){
@@ -125,24 +137,34 @@ public class Algorithms extends Matrix{
 				}
 				break;
 			case GAUSSIAN:
+			case DETERMINANT:
 				for (int i = 0; i < c.length; i++) {
 					if(i > j-1){
 						double ij = c[i][j-1];
 						for(int k = j-1; k<c[i].length;k++){
-								c[i][k] = c[i][k] - ij*c[j-1][k];
+								c[i][k] = c[i][k] - ij/c[j-1][j-1]*c[j-1][k];
 						}
 					}
 				}
 				break;
 			default:
 				break;
-			
 			}
 			
 			//reset max
 			p = 0;
 			max = Double.MIN_VALUE;
 		
+		}
+		
+		if(algoSet==Algo.DETERMINANT){
+			double determinant = Math.pow(-1, r);
+			for (int i = 0; i < c.length; i++) {
+				determinant *=c[i][i];
+			}
+			double[][] d = new double[1][1];
+			d[0][0] = determinant;
+				return d;
 		}
 		
 		return c;

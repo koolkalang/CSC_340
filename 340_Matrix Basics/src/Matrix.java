@@ -25,6 +25,12 @@ public class Matrix{
 			e.printStackTrace();
 		}
 	}
+	
+	public static double mTwoxTwoDeterminant(double[][] d){
+		
+		
+		return d[0][0]*d[1][1]-d[0][1]*d[1][0];
+	}
 
 	public static double[][] mCopy(double[][] x){
 		

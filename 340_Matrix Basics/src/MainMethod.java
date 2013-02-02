@@ -29,6 +29,9 @@ public class MainMethod extends HelperMethods{
 		System.out.println("==============TEST INVERSE===================");
 		double[][] testInverse = {{4,7},{2,6}};
 		printMatrix(algoWorker.inverse(testInverse));
+		System.out.println("==============TEST DETERMINANT===================");
+		double[][] testDeterm = {{1,4,0},{0,2,6},{-1,0,1}};
+		System.out.println(algoWorker.nDeterminant(testDeterm));
 		
 		
 		
