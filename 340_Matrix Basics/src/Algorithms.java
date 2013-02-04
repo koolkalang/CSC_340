@@ -1,4 +1,6 @@
-
+/*
+ * 
+ */
 public class Algorithms extends Matrix{
 	
 	private enum Algo{
