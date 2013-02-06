@@ -43,12 +43,21 @@ public class Matrix{
 		
 		return y;
 	}
+	
 	/*
 	public static double[][] mConformableOnexN(double[] x){
 		double[][] conformable = new double[x.length][1];
-		for(int i = 0;i<x.length;i++)
+		for(int i = 0; i < x.length;i++)
 			conformable[i][0] = x[i];
 		return conformable;
+	}
+	
+	public static double[][] mtransposeOnexN(double[] oldX){
+		double[][] x = new double oldX[1][x.length]; 
+		for(int i = 0;i < ;i++){
+			x[0][x.length] = oldX[i];
+		}
+		return x;
 	}
 	*/
 	
@@ -78,6 +87,14 @@ public class Matrix{
 			z[i][j] = x[i][j]+y[i][j];
 		return z; 
 	}
+	
+	/*
+	public static double[][] mSubtract(double[] oldX, double[] oldY){
+		double[][] x = mConformable(oldX);
+		double[][] y = mConformable(oldY);
+		return mSubtract(x,y);
+	}
+	*/
 	
 	public static double[][] mSubtract(double[][] x, double[][] y){
 		
