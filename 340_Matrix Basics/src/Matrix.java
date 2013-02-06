@@ -43,6 +43,14 @@ public class Matrix{
 		
 		return y;
 	}
+	/*
+	public static double[][] mConformableOnexN(double[] x){
+		double[][] conformable = new double[x.length][1];
+		for(int i = 0;i<x.length;i++)
+			conformable[i][0] = x[i];
+		return conformable;
+	}
+	*/
 	
 	public static double[][] mMultiplyIdentity(int n){
 		
