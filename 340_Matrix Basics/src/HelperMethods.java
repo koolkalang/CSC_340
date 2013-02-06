@@ -1,4 +1,3 @@
-
 public class HelperMethods extends Matrix {
 
 
@@ -36,6 +35,16 @@ public class HelperMethods extends Matrix {
 		avg[1] /= x.length;
 		return avg;
 	}
+	//edited online
+	/*
+	
+	
+	public static double[][] covariance(double[][] originalCovariance){
+		double[][] original = mCopy(oriinalCovariance);
+		
+		return original;
+	}
+	*/
 
 }
 
