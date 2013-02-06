@@ -125,4 +125,11 @@ public class Matrix{
 		}
 	}
 	
+	public static void printArray(double[] m){
+		for(int i = 0;i<m.length;i++){
+				System.out.print(roundTwoDecimals(m[i])+"\t");
+		}
+		System.out.println();
+	}
+	
 }

@@ -10,29 +10,20 @@ public class MainMethod extends HelperMethods{
 		Read mRead = new Read("resources/2013 Test 1 linear.txt");
 		gauss = mRead.getMatrix();
 		
+		double[][] setOne;
+
+		Read reader = new Read("resources/2013 Test 1 data.txt");
+		setOne = reader.getSetOne();
+		
+		
 		System.out.println("\nSystem\n");
 			printMatrix(gauss);
 		System.out.println("\nGauss-Jordan Solution\n");
 			printMatrix(algoWorker.gaussJordan(gauss));	
 		System.out.println("\nGaussian Solution\n");
 			printMatrix(algoWorker.gaussian(gauss));
-		//System.out.println("\nInverse Solution\n");
-		//	printMatrix(algoWorker.inverse(gauss));
-		
-		System.out.println("==============TEST GAUSS===================");
-		double[][] testGuass = {{2,1,-1,8},{-3,-1,2,-11},{-2,1,2,-3}};
-		System.out.println("Gaussian TEST");
-		printMatrix(algoWorker.gaussian(testGuass));
-		System.out.println("Gauss-Jordan TEST");
-		printMatrix(algoWorker.gaussJordan(testGuass));
-		
-		System.out.println("==============TEST INVERSE===================");
-		double[][] testInverse = {{4,7},{2,6}};
-		printMatrix(algoWorker.inverse(testInverse));
-		System.out.println("==============TEST DETERMINANT===================");
-		double[][] testDeterm = {{1,4,0},{0,2,6},{-1,0,1}};
-		System.out.println(algoWorker.nDeterminant(testDeterm));
-		
+		System.out.println("\nSet One Average\n");
+			printArray(averageSet(setOne));
 		
 		
 	}
@@ -74,6 +65,30 @@ public class MainMethod extends HelperMethods{
 		printMatrix(mMultiply(multiplyC, multiplyD));
 		System.out.println("\n");
 		printMatrix(mScalar(addA,34.5));	
+		
+		//System.out.println("\nInverse Solution\n");
+		//	printMatrix(algoWorker.inverse(gauss));
+			
+		System.out.println("==============TEST GAUSS===================");
+		double[][] testGuass = {{2,1,-1,8},{-3,-1,2,-11},{-2,1,2,-3}};
+		System.out.println("Gaussian TEST");
+		//printMatrix(algoWorker.gaussian(testGuass));
+		System.out.println("Gauss-Jordan TEST");
+		//printMatrix(algoWorker.gaussJordan(testGuass));
+		
+		System.out.println("==============TEST INVERSE===================");
+		double[][] testInverse = {{4,7},{2,6}};
+		//printMatrix(algoWorker.inverse(testInverse));
+		System.out.println("==============TEST DETERMINANT===================");
+		double[][] testDeterm = {{1,4,0},{0,2,6},{-1,0,1}};
+		//System.out.println(algoWorker.nDeterminant(gauss));
+		
+		System.out.println("==============TEST AVG===================");
+		double[][] testAvg = {{1,9},{2,8},{3,7},{4,6},{5,5},{6,4}};
+		printMatrix(testAvg);
+		//printMatrix(setOne);
+		printArray(averageSet(testAvg));
+		
 	}
 	
 	private static double[][] addIdentity(double[][] x){

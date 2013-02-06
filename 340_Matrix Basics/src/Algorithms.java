@@ -1,7 +1,7 @@
 /*
  * 
  */
-public class Algorithms extends Matrix{
+public class Algorithms extends HelperMethods{
 	
 	private enum Algo{
 		GAUSSIAN, GAUSSJORDAN, INVERSE, DETERMINANT, NONE
@@ -10,16 +10,6 @@ public class Algorithms extends Matrix{
 	
 	public Algorithms(){
 		algoSet = Algo.NONE;
-	}
-	
-	public void checkAugmented(double[][] x){
-		try {
-			if (!(x[0].length==x.length+1))
-				throw new NotCompatibleException();
-		} catch (NotCompatibleException e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 	public void checkNxN(double[][] x){
