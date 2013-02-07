@@ -1,7 +1,7 @@
 public class HelperMethods extends Matrix {
 
 
-	public void checkAugmented(double[][] x){
+	public static void checkAugmented(double[][] x){
 		try {
 			if (!(x[0].length==x.length+1))
 				throw new NotCompatibleException();
