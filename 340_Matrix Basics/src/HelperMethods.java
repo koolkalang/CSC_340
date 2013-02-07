@@ -11,7 +11,7 @@ public class HelperMethods extends Matrix {
 		
 	}
 	
-	public void checkNxN(double[][] x){
+	public static void checkNxN(double[][] x){
 		try {
 			if (!(x.length==x[0].length))
 				throw new NotCompatibleException();
