@@ -12,17 +12,6 @@ public class Algorithms extends HelperMethods{
 		algoSet = Algo.NONE;
 	}
 	
-	public void checkNxN(double[][] x){
-		try {
-			if (!(x.length==x[0].length))
-				throw new NotCompatibleException();
-		} catch (NotCompatibleException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-		
-	}
-	
 	private void checkValid(){
 		try{
 			if(algoSet == Algo.NONE)
