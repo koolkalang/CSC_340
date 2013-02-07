@@ -1,8 +1,7 @@
-
 public class HelperMethods extends Matrix {
 
 
-	public void checkAugmented(double[][] x){
+	public static void checkAugmented(double[][] x){
 		try {
 			if (!(x[0].length==x.length+1))
 				throw new NotCompatibleException();
@@ -12,7 +11,7 @@ public class HelperMethods extends Matrix {
 		
 	}
 	
-	public void checkNxN(double[][] x){
+	public static void checkNxN(double[][] x){
 		try {
 			if (!(x.length==x[0].length))
 				throw new NotCompatibleException();
@@ -36,6 +35,16 @@ public class HelperMethods extends Matrix {
 		avg[1] /= x.length;
 		return avg;
 	}
+	//edited online
+	/*
+	
+	
+	public static double[][] covariance(double[][] originalCovariance){
+		double[][] original = mCopy(oriinalCovariance);
+		
+		return original;
+	}
+	*/
 
 }
 
