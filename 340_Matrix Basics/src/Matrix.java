@@ -2,8 +2,10 @@ import java.text.DecimalFormat;
 
 /*  most of these method names have an m prefix, meaning matrix.
  * 
+ * TODO:
+ *  cleaner, better transpose methods. currently only implementation of transpose is a quick and dirty one in another class.
+ * 
  */
-
 public class Matrix{
 	
 	
@@ -19,7 +21,7 @@ public class Matrix{
 
 	public static void checkEqualDim(double[][] x, double[][] y) {
 		try {
-			if (!(x[0].length == y.length))
+			if (!(x.length == y.length && x[0].length == y[0].length))
 				throw new NotCompatibleException();
 		} catch (NotCompatibleException e) {
 			e.printStackTrace();
@@ -44,8 +46,7 @@ public class Matrix{
 		return y;
 	}
 	
-	/*
-	public static double[][] mConformableOnexN(double[] x){
+	public static double[][] mConformableNxOne(double[] x){
 		double[][] conformable = new double[x.length][1];
 		for(int i = 0; i < x.length;i++)
 			conformable[i][0] = x[i];
@@ -53,13 +54,13 @@ public class Matrix{
 	}
 	
 	public static double[][] mtransposeOnexN(double[] oldX){
-		double[][] x = new double oldX[1][x.length]; 
-		for(int i = 0;i < ;i++){
+		double[][] x = new double[1][oldX.length]; 
+		for(int i = 0;i < oldX.length;i++){
 			x[0][x.length] = oldX[i];
 		}
 		return x;
 	}
-	*/
+
 	
 	public static double[][] mMultiplyIdentity(int n){
 		
@@ -88,13 +89,11 @@ public class Matrix{
 		return z; 
 	}
 	
-	/*
 	public static double[][] mSubtract(double[] oldX, double[] oldY){
-		double[][] x = mConformable(oldX);
-		double[][] y = mConformable(oldY);
+		double[][] x = mConformableNxOne(oldX);
+		double[][] y = mConformableNxOne(oldY);
 		return mSubtract(x,y);
 	}
-	*/
 	
 	public static double[][] mSubtract(double[][] x, double[][] y){
 		

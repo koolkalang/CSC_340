@@ -25,8 +25,9 @@ public class MainMethod extends HelperMethods{
 		System.out.println("\nSet One Average\n");
 			printArray(averageSet(setOne));
 		
-		
+			
 	}
+	
 
 	public static void consoleTests(){
 		
@@ -42,6 +43,7 @@ public class MainMethod extends HelperMethods{
 		double[][] multiplyC = {{1,2,3},{4,5,6}}; 
 		double[][] multiplyD = {{3},{5},{9}};
 		
+		Algorithms algoTest = new Algorithms();
 		Read reader = new Read("resources/2013 Test 1 data.txt");
 		setOne = reader.getSetOne();
 		setTwo = reader.getSetTwo();
@@ -88,23 +90,17 @@ public class MainMethod extends HelperMethods{
 		printMatrix(testAvg);
 		//printMatrix(setOne);
 		printArray(averageSet(testAvg));
-		
-	}
 	
-	private static double[][] addIdentity(double[][] x){
-		double[][] identityX = mMultiplyIdentity(x.length);
-		double[][] newX = new double[x.length][x.length*2];
+		System.out.println("\nTest covariance, inverse\n");
+		double[][] covTest = {{2,6},{3,4},{3,8},{4,6},};
+		//double[][] covTest = {{1,-2},{3,0},{3,-4},{5,-2},};
+		System.out.println("\ncovariance of covTest\n");
+		printMatrix(covariance(covTest));
+		System.out.println("\ninverse of covariance of covTest\n");
+		printMatrix(algoTest.inverse(covariance(covTest)));
+		System.out.println("\ndeterminant covariance of covTest\n");
+		System.out.println(mTwoxTwoDeterminant(covariance(covTest)));
 		
-		for (int i = 0; i < newX.length; i++) {
-			for (int j = 0; j < newX.length; j++) {
-				if(j<x.length)
-					newX[i][j] = x[i][j];
-				else
-					newX[i][j] = identityX[i][j-x.length];
-			}	
-		}
-		
-		return newX;
 	}
 
 }

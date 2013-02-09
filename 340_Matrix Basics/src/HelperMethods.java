@@ -35,16 +35,36 @@ public class HelperMethods extends Matrix {
 		avg[1] /= x.length;
 		return avg;
 	}
-	//edited online
-	/*
 	
-	
-	public static double[][] covariance(double[][] originalCovariance){
-		double[][] original = mCopy(oriinalCovariance);
+	public static double[][] covariance(double[][] set){
+		double[][] covariance = new double[2][2];
+		double[] averageV = averageSet(set);
+		double[] current = new double[2];
+		double[][] middle;
+		double[][] middlet = new double[1][2];
 		
-		return original;
+		for (int i = 0; i < set.length; i++) {
+			current[0] = set[i][0];
+			current[1] = set[i][1];
+			
+			middle = mSubtract(current,averageV);
+			
+//			System.out.println("=== Sanity Check ===");
+//			System.out.println("current length "+current.length);
+//			System.out.println("average length "+averageV.length);
+//			System.out.println("middle length "+middle.length);
+//			System.out.println("=== Sanity Check ===");
+			
+	//quick and dirty transpose
+			middlet[0][0] = middle[0][0];
+			middlet[0][1] = middle[1][0];
+			
+			covariance = mAdd(covariance,mMultiply(middle,middlet));	
+		}
+		
+		
+		return mScalar(covariance,(double)1/set.length);
 	}
-	*/
 
 }
 
