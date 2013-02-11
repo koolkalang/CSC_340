@@ -66,5 +66,30 @@ public class HelperMethods extends Matrix {
 		return mScalar(covariance,(double)1/set.length);
 	}
 
+	public static double discrimFunction(double[] point, double[] avgSet, double[][] cov){
+		
+		Algorithms algo = new Algorithms();
+		double[][] middle;
+		double[][] middlet = new double[1][2];
+		double[][] inv = algo.inverse(cov);
+		double det = mTwoxTwoDeterminant(cov);
+		//printMatrix(inv);
+		double x = -(1.0/2);
+		//System.out.println("=========TESTTESTTESTQQ++++++");
+		//System.out.println(point[0]+"\t"+point[1]);
+		middle = mSubtract(point, avgSet);
+		//System.out.println("=========TESTTESTTESTQQ++++++");
+		//System.out.println(middle[0][0]+"\t"+middle[1][0]);
+		//printMatrix(middle);
+		middlet = mTransposeOnexN(middle);
+		//printMatrix(middlet);
+		middlet = mMultiply(middlet, inv);
+		//printMatrix(middle);
+		middle = mMultiply(middlet, middle);
+		//printMatrix(middle);
+		return x*middle[0][0]+x*Math.log(det);
+	}
+
+	
 }
 

@@ -3,7 +3,7 @@ import java.text.DecimalFormat;
 /*  most of these method names have an m prefix, meaning matrix.
  * 
  * TODO:
- *  cleaner, better transpose methods. currently only implementation of transpose is a quick and dirty one in another class.
+ *  cleaner, better transpose methods. 
  * 
  */
 public class Matrix{
@@ -18,6 +18,24 @@ public class Matrix{
 				e.printStackTrace();
 			}
 	}
+	
+	/*  checkDim
+	 * 	-check that the incoming arguments of the 2D array argX and argY, 
+	 *   are compatible with int x and int y.
+	 *   if x or y is negative or zero, assume those parameters are n.
+	 */
+	public static void checkDim(int argX, int argY, int x, int y){
+		try {
+			/* Intended interpretation:
+			 * If (arg is supposed to be a set length), AND (the arg is not the set length),
+			 * throw exception.
+			 */
+			if ( ((x > 0) && (argX != x)) || ((y > 0) && (argY != y)) )
+				throw new NotCompatibleException();
+		} catch (NotCompatibleException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void checkEqualDim(double[][] x, double[][] y) {
 		try {
@@ -27,7 +45,6 @@ public class Matrix{
 			e.printStackTrace();
 		}
 	}
-	
 	public static double mTwoxTwoDeterminant(double[][] d){
 		
 		
@@ -53,14 +70,33 @@ public class Matrix{
 		return conformable;
 	}
 	
-	public static double[][] mtransposeOnexN(double[] oldX){
+	public static double[] mTransposeNxOne(double[][] oldX){
+		checkDim(oldX.length, oldX[0].length,1,-1);
+		
+		double[] x = new double[oldX[0].length]; 
+		for(int i = 0;i < oldX.length;i++){
+			x[i] = oldX[0][i];
+		}
+		return x;
+	}
+	
+	public static double[][] mTransposeOnexN(double[] oldX){
 		double[][] x = new double[1][oldX.length]; 
 		for(int i = 0;i < oldX.length;i++){
-			x[0][x.length] = oldX[i];
+			x[0][i] = oldX[i];
 		}
 		return x;
 	}
 
+	public static double[][] mTransposeOnexN(double[][] oldX){
+		checkDim(oldX.length,oldX[0].length, -1,1);
+		
+		double[][] x = new double[1][oldX.length]; 
+		for(int i = 0;i < oldX.length;i++){
+			x[0][i] = oldX[i][0];
+		}
+		return x;
+	}
 	
 	public static double[][] mMultiplyIdentity(int n){
 		

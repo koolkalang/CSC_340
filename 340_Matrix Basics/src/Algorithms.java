@@ -147,6 +147,16 @@ public class Algorithms extends HelperMethods{
 			d[0][0] = determinant;
 				return d;
 		}
+		//chop off beginning identity.
+		if(algoSet==Algo.INVERSE){
+			double[][] d = new double[c.length][c[0].length/2];
+			for (int i = 0; i < d.length; i++) {
+				for (int j = 0; j < d.length; j++) {
+					d[i][j] = c[i][j+d.length];
+				}
+			}
+			return d;
+		}
 		
 		return c;
 	}
