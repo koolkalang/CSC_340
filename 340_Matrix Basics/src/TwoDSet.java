@@ -4,12 +4,12 @@
 public class TwoDSet extends HelperMethods {
 	public double[][] cov;
 	public double[][] set;
-	public double[] avg;
+	public double[] mean;
 	
 	public TwoDSet(double[][] inSet){
 		set = inSet;
 		cov = covariance(set);
-		avg = averageSet(set);
+		mean = averageSet(set);
 	}
 	
 	

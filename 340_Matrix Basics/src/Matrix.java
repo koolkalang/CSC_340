@@ -37,6 +37,15 @@ public class Matrix{
 		}
 	}
 
+	public static void checkSquare(double[][] x){
+		try {
+			if (!(x.length == x[0].length))
+				throw new NotCompatibleException();
+		} catch (NotCompatibleException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void checkEqualDim(double[][] x, double[][] y) {
 		try {
 			if (!(x.length == y.length && x[0].length == y[0].length))
@@ -169,6 +178,30 @@ public class Matrix{
 		}
 		return z;
 		
+	}
+	
+	public static double mConditionNum(double[][] x){
+		Algorithms algo = new Algorithms();
+		return mNorm(x)*mNorm(algo.inverse(x));
+	}
+	
+	public static double mNorm(double[][] x){
+		
+		checkSquare(x);
+		
+		double[] sum = new double[x.length];
+		double max = Double.MIN_VALUE;
+		for (int i = 0; i < sum.length; i++) {
+			for (int j = 0; j < sum.length; j++) {
+				sum[i] += x[i][j];
+			}
+		}
+		for (int i = 0; i < sum.length; i++) {
+			if(sum[i]>max){
+				max = sum[i];
+			}
+		}
+		return max;
 	}
 	
 	private static 
