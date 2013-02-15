@@ -13,6 +13,7 @@ public class MainMethod extends HelperMethods{
 		
 		double[][] setOne;
 		double[][] setTwo;
+		double g1,g2;
 
 		Read reader = new Read("resources/2013 Test 1 data.txt");
 		setOne = reader.getSetOne();
@@ -39,6 +40,118 @@ public class MainMethod extends HelperMethods{
 				printMatrix(algoWorker.inverse(datOne.cov));
 			System.out.println("Inverse 2: ");
 				printMatrix(algoWorker.inverse(datTwo.cov));
+		System.out.println("----6 mean vectors 6----");
+			g1 = discrimFunction(datOne.mean,datOne.mean,datOne.cov);
+			g2 = discrimFunction(datOne.mean,datTwo.mean,datTwo.cov);
+			System.out.println("discriminant results: \t g1: "+g1 +"\t g2:"+ g2);
+			if(g1 > g2)
+				System.out.println("mean of class 1 should be in class 1");
+			g1 = discrimFunction(datTwo.mean,datOne.mean,datOne.cov);
+			g2 = discrimFunction(datTwo.mean,datTwo.mean,datTwo.cov);
+			System.out.println("discriminant results: \t g1: "+g1 +"\t g2:"+ g2);
+			if(g2 > g1)
+				System.out.println("mean of class 2 should be in class 2");
+		System.out.println("----7 mean vectors 7----");
+			System.out.println("--a--");
+			int errorsOne = 0;
+			int errorsTwo = 0;
+			int rightOne = 0;
+			int rightTwo = 0;
+			
+			System.out.println("set one mis-classified");
+			System.out.println("x\ty\tg1\tg2");
+			for (int i = 0; i < setTwo.length; i++) {
+				g1 = discrimFunction(datOne.set[i],datOne.mean,datOne.cov);
+				g2 = discrimFunction(datOne.set[i],datTwo.mean,datTwo.cov);
+				if(!(g1 > g2)){
+					System.out.println(roundTwoDecimals(datOne.set[i][0])+"\t"+
+									   roundTwoDecimals(datOne.set[i][1])+"\t"+
+									   roundTwoDecimals(g1)+"\t"+
+									   roundTwoDecimals(g2));
+					errorsOne++;
+				}else{
+					rightOne++;
+				}
+			}
+			System.out.println("total: "+errorsOne);
+			System.out.println();
+			System.out.println("set two mis-classified");
+			System.out.println("x\ty\tg1\tg2");
+			for (int i = 0; i < setTwo.length; i++) {
+				g1 = discrimFunction(datTwo.set[i],datOne.mean,datOne.cov);
+				g2 = discrimFunction(datTwo.set[i],datTwo.mean,datTwo.cov);
+				if(!(g2 > g1)){
+					System.out.println(roundTwoDecimals(datOne.set[i][0])+"\t"+
+									   roundTwoDecimals(datOne.set[i][1])+"\t"+
+									   roundTwoDecimals(g1)+"\t"+
+									   roundTwoDecimals(g2));
+					errorsTwo++;
+				}else{
+					rightTwo++;
+				}
+			}
+			System.out.println("total: "+errorsTwo);
+			System.out.println("--b--");
+			System.out.println("class 1: "+rightOne+"/"+datOne.set.length+" correctly identified");
+			System.out.println("class 1: "+rightTwo+"/"+datTwo.set.length+" correctly identified");
+		System.out.println("---- 9 linear systems 9----");
+			System.out.println("--gauss jordan--");
+			printMatrix(algoWorker.gaussJordan(coeff));
+			System.out.println("--determinant--");
+			System.out.println(algoWorker.nDeterminant(coeff));
+			System.out.println("--inverse--");
+			//quick thing to lop off augmentation
+			double[][] coeffSquare = new double[coeff.length][coeff.length];
+			for(int i = 0;i < coeffSquare.length;i++)
+				for (int j = 0; j < coeffSquare.length; j++) {
+					coeffSquare[i][j] = coeff[i][j];
+				}
+			
+			printMatrix(algoWorker.inverse(coeffSquare));
+			System.out.println("--determinant of inverse--");
+			System.out.println(algoWorker.nDeterminant(algoWorker.inverse(coeffSquare)));
+			System.out.println("--product of determiants--");
+			System.out.println(algoWorker.nDeterminant(algoWorker.inverse(coeffSquare))
+								*algoWorker.nDeterminant(coeffSquare));
+			System.out.println("Average");
+			System.out.println(datOne.mean[0]+"\t"+datOne.mean[1]);
+			System.out.println("Covariance");
+			printMatrix(datOne.cov);
+			System.out.println(mTwoxTwoDeterminant(datOne.cov));
+			
+			System.out.println("Average");
+			System.out.println(datTwo.mean[0]+"\t"+datTwo.mean[1]);
+			System.out.println("Covariance");
+			printMatrix(datTwo.cov);
+			System.out.println(mTwoxTwoDeterminant(datTwo.cov));
+			
+			double[] sums = new double[coeffSquare.length];
+			double max = Integer.MIN_VALUE;
+			int row = Integer.MIN_VALUE;
+			for(int i = 0;i <coeffSquare.length;i++){
+				for(int j = 0;j <coeffSquare.length;j++){	
+					sums[i] +=	Math.abs(coeffSquare[i][j]);
+				}
+				if(sums[i]>max){
+					max = sums[i];
+					row = i;
+				}
+			}
+			System.out.println(max);
+			double[][] invcoeff = algoWorker.inverse(coeffSquare);
+
+			max = Integer.MIN_VALUE;
+			row = Integer.MIN_VALUE;
+			for(int i = 0;i <invcoeff.length;i++){
+				for(int j = 0;j <invcoeff.length;j++){	
+					sums[i] +=	Math.abs(invcoeff[i][j]);
+				}
+				if(sums[i]>max){
+					max = sums[i];
+					row = i;
+				}
+			}
+			System.out.println(max);
 			
 			
 			

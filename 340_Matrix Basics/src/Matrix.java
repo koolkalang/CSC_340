@@ -204,7 +204,7 @@ public class Matrix{
 		return max;
 	}
 	
-	private static 
+	public static 
 	double roundTwoDecimals(double d) {
         DecimalFormat twoDForm = new DecimalFormat("#.##");
     return Double.valueOf(twoDForm.format(d));
